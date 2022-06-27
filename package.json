@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/PedroQueiroz1/CRUDNodeJS#readme",
   "dependencies": {
+    "ejs": "^3.1.8",
     "express": "^4.18.1"
   }
 }
