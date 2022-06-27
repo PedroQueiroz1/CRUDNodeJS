@@ -1,0 +1,49 @@
+var agendaModel = require('../models/agendaModel')();
+
+module.exports.index = function(req,res){
+    agendaModel.all(function(erro, resultado){
+        res.render('site/home',{pessoas:resultado,erros:{},dados:{}});
+    });
+};
+
+module.exports.store = function(req,res){
+
+    var dados = req.body;
+
+    req.assert('nome','!!! Preencha um Nome.').notEmpty();
+    req.assert('email','!!! Preencha um E-mail.').notEmpty();
+    req.assert('email','!!! Preencha um E-mail válido.').isEmail();
+    req.assert('nome','!!! Nome deve ter de 3 a 20 caracteres.').len(3,20);
+    req.assert('numero','!!! Preencha um Número.').notEmpty();
+    //req.assert('numero','!!! preencha um Número válido.');
+
+    var validacaoErros = req.validationErrors();
+
+    if(validacaoErros){
+        console.log(validacaoErros);
+        agendaModel.all(function(erro, resultado){
+            res.render('site/home',{pessoas:resultado,erros:validacaoErros,dados:dados});
+        });
+        return;
+    }
+
+    agendaModel.save(dados,function(erro, resultado){
+        if(!erro){
+        res.redirect('/');
+        }else{
+            console.log("Erro ao adicionar pessoa");
+            res.redirect('/');
+        }
+    });
+};
+
+module.exports.show = function(req,res){
+ agendaModel.find(req.params.id,function(erro, resultado){
+    if(resultado[0] && !erro){
+    res.render('site/detalhe',{pessoa:resultado[0]});
+}else{
+    console.log("Essa pessoa não existe na agenda");
+    res.redirect('/');
+}
+});
+}

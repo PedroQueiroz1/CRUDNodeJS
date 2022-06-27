@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+        <title>CRUD com Node JS</title>
+        </head>
+    
+        <body>
+         <h1>Página principal</h1>
+         <ul>
+            <% for(var chave in pessoas){ %>
+           
+                   <li><%= pessoas[chave].nome %> - <%= pessoas[chave].email %> - <%= pessoas[chave].numero %></li>
+   
+            <% } %>
+           </ul>
+           <br>
+           <% if(erros){ %>
+           <ul>
+             <% for(var k in erros){%>
+             <li><%= erros[k].msg %></li>
+             <% } %>
+           </ul>
+           <% } %>
+   
+           <form action="/" method="post">
+             <input type="text" name="nome" placeholder="Nome" value="<%= dados.nome %>">
+             <input type="text" name="email" placeholder="E-mail" value="<%= dados.email %>">
+             <input type="text" name="numero" placeholder="Número" value="<%= dados.numero %>">
+             <button>Adicionar</button>
+           </form>
+        </body>
+    </html> 
