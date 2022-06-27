@@ -4,8 +4,7 @@ module.exports = function(app){
     });
     
     app.get('/',function(req,res){
-        // console.log(clienteModel.all());
-        clienteController.index(req,res);
+        agendaController.index(req,res);
 
     });
 }
