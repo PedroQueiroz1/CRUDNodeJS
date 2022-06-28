@@ -15,7 +15,7 @@ module.exports.store = function(req,res){
     req.assert('email','!!! Preencha um E-mail válido.').isEmail();
     req.assert('nome','!!! Nome deve ter de 3 a 20 caracteres.').len(3,20);
     req.assert('numero','!!! Preencha um Número.').notEmpty();
-    //req.assert('numero','!!! preencha um Número válido.');
+    req.assert('numero','!!! O telefone deve seguir o exemplo: "21912345678".').len(11);
 
     var validacaoErros = req.validationErrors();
 
