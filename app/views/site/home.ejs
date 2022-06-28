@@ -5,28 +5,39 @@
         </head>
     
         <body>
-         <h1>Agenda</h1>
-         <ul>
+         <h1> <font size="20">Agenda</font></h1>
+         <ol>
             <% for(var chave in pessoas){ %>
            
                    <li><%= pessoas[chave].nome %> - <%= pessoas[chave].email %> - <%= pessoas[chave].numero %></li>
    
             <% } %>
-           </ul>
+            </ol>
            <br>
            <% if(erros){ %>
-           <ul>
+            <ul>
              <% for(var k in erros){%>
              <li><%= erros[k].msg %></li>
              <% } %>
-           </ul>
+            </ul>
            <% } %>
    
-           <form action="/" method="post">
+           <form action="/adicionar" method="post">
              <input type="text" name="nome" placeholder="Nome" value="<%= dados.nome %>">
              <input type="text" name="email" placeholder="E-mail" value="<%= dados.email %>">
              <input type="text" name="numero" placeholder="Número" value="<%= dados.numero %>">
              <button>Adicionar</button>
            </form>
+           <form action="/atualizar" method="put">
+            <input type="number" name="id" placeholder="ID" value="<%= dados.id %>">
+            <input type="text" name="nome" placeholder="Nome" value="<%= dados.nome %>">
+            <input type="text" name="email" placeholder="E-mail" value="<%= dados.email %>">
+            <input type="text" name="numero" placeholder="Número" value="<%= dados.numero %>">
+            <button>Atualizar</button>
+          </form>
+          <form action="/deletar" method="delete">
+            <input type="number" name="id" placeholder="ID" value="<%= dados.id %>">
+            <button>Deletar</button>
+          </form>
         </body>
     </html> 

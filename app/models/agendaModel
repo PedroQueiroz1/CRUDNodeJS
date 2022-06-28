@@ -16,6 +16,11 @@ module.exports = function(){
     var con = db();
     return con.query('insert into pessoas set ?',dados,retorno);
   };
+  
+  this.delete = function(id,retorno){
+    var con = db();
+    return con.query('delete from pessoas where id = ?',id,retorno);
+  };
 
   return this;
 };

@@ -1,13 +1,41 @@
-var agendaModel = require('../models/agendaModel')();
+const PessoaDao = require("../models/DAO/agenda");
 
-module.exports.index = function(req,res){
+module.exports = {
+    async listar (req, res) {
+        try{
+            const oPessoas = await new PessoaDao().listarTodos();
+            return res.json(oPessoas).status(200);
+        }catch(error){
+            return res.json(error).status(404);
+        }
+    },
+
+    async adicionar (req, res){
+        const oPessoa = req.body;
+        try {
+           const sPessoa = await new PessoaDao().adicionar(oPessoa);
+           return res.json(sPessoa).status(201);
+        } catch (error) {
+            return res.json(error).status(500); 
+        }
+    }
+}
+
+
+
+
+
+
+
+/*var agendaModel = require('../models/agendaModel')();
+
+module.exports.listar = function(req,res){
     agendaModel.all(function(erro, resultado){
         res.render('site/home',{pessoas:resultado,erros:{},dados:{}});
     });
 };
 
-module.exports.store = function(req,res){
-
+module.exports.adicionar = function(req,res){
     var dados = req.body;
 
     req.assert('nome','!!! Preencha um Nome.').notEmpty();
@@ -37,7 +65,7 @@ module.exports.store = function(req,res){
     });
 };
 
-module.exports.show = function(req,res){
+module.exports.listarPessoa = function(req,res){
  agendaModel.find(req.params.id,function(erro, resultado){
     if(resultado[0] && !erro){
     res.render('site/detalhe',{pessoa:resultado[0]});
@@ -46,4 +74,16 @@ module.exports.show = function(req,res){
     res.redirect('/');
 }
 });
+
+async remover(req,res){
+    const oId = req.params.id;
+    try{
+        const aPessoa = await new agendaModel().remover(oId);
+        return res.json(aPessoa).status(200);
+    }catch(error) {
+        return res.json(error).status(404);
+    }
+
 }
+
+}*/
